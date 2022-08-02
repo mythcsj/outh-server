@@ -1,24 +1,18 @@
 import { createHash } from 'crypto';
+import { sign } from 'jsonwebtoken';
 import {
-    JsonController,
-    Get,
-    Post,
     Authorized,
-    CurrentUser,
-    Param,
     Body,
-    ForbiddenError
+    CurrentUser,
+    ForbiddenError,
+    Get,
+    JsonController,
+    Param,
+    Post
 } from 'routing-controllers';
 import { ResponseSchema } from 'routing-controllers-openapi';
-import { JsonWebTokenError, sign } from 'jsonwebtoken';
 
-import dataSource, {
-    JWTAction,
-    SignInData,
-    SignUpData,
-    UserModel,
-    User
-} from '../model';
+import dataSource, { SignInData, SignUpData, User, UserModel } from '../model';
 
 const { APP_SECRET } = process.env;
 
@@ -32,11 +26,11 @@ export class UserController {
             .digest('hex');
     }
 
-    static getSession({ context: { state } }: JWTAction) {
-        return state instanceof JsonWebTokenError
-            ? console.error(state)
-            : state.user;
-    }
+    // static getSession({ context: { state } }: JWTAction) {
+    //     return state instanceof JsonWebTokenError
+    //         ? console.error(state)
+    //         : state.user;
+    // }
 
     @Get('/session')
     @Authorized()
