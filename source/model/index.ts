@@ -4,10 +4,16 @@ import { ConnectionOptions, parse } from 'pg-connection-string';
 
 import { Home } from './Home';
 import { User } from './User';
+import { OauthClient } from './oauth/OauthClient';
+import { OauthCode } from './oauth/OauthCode';
+import { OauthToken } from './oauth/OauthToken';
 
 export * from './Base';
 export * from './Home';
 export * from './User';
+export * from './oauth/OauthClient';
+export * from './oauth/OauthCode';
+export * from './oauth/OauthToken';
 
 const { NODE_ENV, DATABASE_URL } = process.env;
 
@@ -22,7 +28,7 @@ const commonOptions: Pick<
     'synchronize' | 'entities' | 'migrations'
 > = {
     synchronize: true,
-    entities: [Home, User],
+    entities: [Home, User, OauthClient, OauthCode, OauthToken],
     migrations: [`${isProduct ? '.data' : 'migration'}/*.ts`]
 };
 

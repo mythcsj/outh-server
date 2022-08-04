@@ -26,12 +26,6 @@ export class UserController {
             .digest('hex');
     }
 
-    // static getSession({ context: { state } }: JWTAction) {
-    //     return state instanceof JsonWebTokenError
-    //         ? console.error(state)
-    //         : state.user;
-    // }
-
     @Get('/session')
     @Authorized()
     @ResponseSchema(UserModel)
